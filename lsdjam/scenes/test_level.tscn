@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bq5lc6hm3jt8e" path="res://scenes/player/player.tscn" id="1_2venv"]
 [ext_resource type="Script" uid="uid://bh3vqd0s8t1et" path="res://scenes/dialogue_button.gd" id="2_j6w7d"]
 [ext_resource type="Script" uid="uid://biainkldgnay2" path="res://scenes/dialogue_ui.gd" id="2_paw1w"]
+[ext_resource type="Script" uid="uid://clb3xrtfowbhi" path="res://scenes/dream_button.gd" id="3_x4b8f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rm7dq"]
 size = Vector3(30, 1, 30)
@@ -46,8 +47,11 @@ size = Vector3(0.65, 0.65, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ceaq"]
 size = Vector3(0.65, 0.65, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmr53"]
+albedo_color = Color(0.78039217, 0.54901963, 0.61960787, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_2venv"]
-material = SubResource("StandardMaterial3D_d1cij")
+material = SubResource("StandardMaterial3D_tmr53")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_seaco"]
 
@@ -107,6 +111,8 @@ shape = SubResource("BoxShape3D_degyb")
 
 [node name="DreamButton" type="StaticBody3D" parent="TestCube" unique_id=1951336827]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, -1.1)
+script = ExtResource("3_x4b8f")
+destination_scene = "uid://bende7yxehw33"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube/DreamButton" unique_id=132300390]
 mesh = SubResource("BoxMesh_mxxaj")

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bende7yxehw33"]
+
+[ext_resource type="PackedScene" uid="uid://bq5lc6hm3jt8e" path="res://scenes/player/player.tscn" id="1_4djst"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p2u8q"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fhdl"]
+albedo_color = Color(0.78039217, 0.54901963, 0.61960787, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4djst"]
+material = SubResource("StandardMaterial3D_8fhdl")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Environment" id="Environment_4djst"]
+background_mode = 1
+background_color = Color(0.5019608, 0.39215687, 0.63529414, 1)
+ambient_light_color = Color(0.654902, 0.7137255, 0.77254903, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_8fhdl"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_56q7n"]
+size = Vector3(2, 2, 2)
+
+[node name="DreamTest" type="Node3D" unique_id=72258010]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=572402354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=694326373]
+shape = SubResource("BoxShape3D_p2u8q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=895786264]
+mesh = SubResource("BoxMesh_4djst")
+
+[node name="Player" parent="." unique_id=1239137699 instance=ExtResource("1_4djst")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=422855112]
+transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 3.232606, 8.008085)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1673190046]
+environment = SubResource("Environment_4djst")
+
+[node name="TestCube2" type="StaticBody3D" parent="." unique_id=935065766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -2.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube2" unique_id=1158101286]
+mesh = SubResource("BoxMesh_8fhdl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube2" unique_id=121601884]
+shape = SubResource("BoxShape3D_56q7n")

@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://13djynn0bse4"]
+
+[ext_resource type="PackedScene" uid="uid://bq5lc6hm3jt8e" path="res://scenes/player/player.tscn" id="1_2venv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rm7dq"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_seaco"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Environment" id="Environment_seaco"]
+background_mode = 1
+background_color = Color(0.4509804, 0.5372549, 0.60784316, 1)
+ambient_light_color = Color(0.654902, 0.7137255, 0.77254903, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1cij"]
+albedo_color = Color(0.78039217, 0.54901963, 0.61960787, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rm7dq"]
+material = SubResource("StandardMaterial3D_d1cij")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2venv"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2venv"]
+material = SubResource("StandardMaterial3D_d1cij")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_seaco"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_degyb"]
+albedo_color = Color(0.78039217, 0.54901963, 0.61960787, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d1cij"]
+material = SubResource("StandardMaterial3D_degyb")
+size = Vector3(3, 0.5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fma6k"]
+size = Vector3(3, 0.5, 5)
+
+[node name="TestLevel" type="Node3D" unique_id=2125713836]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1948294640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=24915664]
+shape = SubResource("BoxShape3D_rm7dq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1739406541]
+mesh = SubResource("BoxMesh_seaco")
+
+[node name="Player" parent="." unique_id=1239137699 instance=ExtResource("1_2venv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5713768, -4.7683716e-07, 1.4367981)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=555035880]
+transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 3.232606, 8.008085)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=804107272]
+environment = SubResource("Environment_seaco")
+
+[node name="TestCube" type="StaticBody3D" parent="." unique_id=1523798031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube" unique_id=1397469028]
+mesh = SubResource("BoxMesh_rm7dq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube" unique_id=375952022]
+shape = SubResource("BoxShape3D_2venv")
+
+[node name="TestCube2" type="StaticBody3D" parent="." unique_id=1911161677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -2.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube2" unique_id=1490498280]
+mesh = SubResource("BoxMesh_2venv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube2" unique_id=467413449]
+shape = SubResource("BoxShape3D_seaco")
+
+[node name="TunnelRoof" type="StaticBody3D" parent="." unique_id=281528225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.4, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TunnelRoof" unique_id=517070716]
+mesh = SubResource("BoxMesh_d1cij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TunnelRoof" unique_id=1621035465]
+shape = SubResource("BoxShape3D_fma6k")

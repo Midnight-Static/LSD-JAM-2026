@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://13djynn0bse4"]
 
 [ext_resource type="PackedScene" uid="uid://bq5lc6hm3jt8e" path="res://scenes/player/player.tscn" id="1_2venv"]
+[ext_resource type="Script" uid="uid://bh3vqd0s8t1et" path="res://scenes/dialogue_button.gd" id="2_j6w7d"]
+[ext_resource type="Script" uid="uid://biainkldgnay2" path="res://scenes/dialogue_ui.gd" id="2_paw1w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rm7dq"]
 size = Vector3(30, 1, 30)
@@ -24,6 +26,26 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_2venv"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40yo8"]
+albedo_color = Color(0.32941177, 0.56078434, 0.7294118, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fma6k"]
+material = SubResource("StandardMaterial3D_40yo8")
+size = Vector3(0.65, 0.65, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_degyb"]
+size = Vector3(0.65, 0.65, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a35p"]
+albedo_color = Color(0.5529412, 0.73333335, 0.4745098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mxxaj"]
+material = SubResource("StandardMaterial3D_8a35p")
+size = Vector3(0.65, 0.65, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ceaq"]
+size = Vector3(0.65, 0.65, 0.2)
+
 [sub_resource type="BoxMesh" id="BoxMesh_2venv"]
 material = SubResource("StandardMaterial3D_d1cij")
 
@@ -38,6 +60,9 @@ size = Vector3(3, 0.5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fma6k"]
 size = Vector3(3, 0.5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2venv"]
+font_size = 25
 
 [node name="TestLevel" type="Node3D" unique_id=2125713836]
 
@@ -70,6 +95,25 @@ mesh = SubResource("BoxMesh_rm7dq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube" unique_id=375952022]
 shape = SubResource("BoxShape3D_2venv")
 
+[node name="DialogueButton" type="StaticBody3D" parent="TestCube" unique_id=473865122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, -1.1)
+script = ExtResource("2_j6w7d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube/DialogueButton" unique_id=2025305539]
+mesh = SubResource("BoxMesh_fma6k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/DialogueButton" unique_id=2141272574]
+shape = SubResource("BoxShape3D_degyb")
+
+[node name="DreamButton" type="StaticBody3D" parent="TestCube" unique_id=1951336827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, -1.1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestCube/DreamButton" unique_id=132300390]
+mesh = SubResource("BoxMesh_mxxaj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/DreamButton" unique_id=710864557]
+shape = SubResource("BoxShape3D_1ceaq")
+
 [node name="TestCube2" type="StaticBody3D" parent="." unique_id=1911161677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -2.5)
 
@@ -87,3 +131,30 @@ mesh = SubResource("BoxMesh_d1cij")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TunnelRoof" unique_id=1621035465]
 shape = SubResource("BoxShape3D_fma6k")
+
+[node name="DialogueUI" type="CanvasLayer" parent="." unique_id=1217447081]
+script = ExtResource("2_paw1w")
+
+[node name="PanelContainer" type="PanelContainer" parent="DialogueUI" unique_id=800381826]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = -148.0
+offset_right = -202.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueUI/PanelContainer" unique_id=367756990]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DialogueUI/PanelContainer/MarginContainer" unique_id=1679661386]
+layout_mode = 2
+text = "If you read this, you are gay.
+... 
+.....
+That's weird, nothing changed."
+label_settings = SubResource("LabelSettings_2venv")
+horizontal_alignment = 1

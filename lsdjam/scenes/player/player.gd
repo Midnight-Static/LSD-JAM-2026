@@ -18,9 +18,10 @@ extends CharacterBody3D
 # How quickly the player changes between standing and crouching
 @export var crouch_transition_speed: float = 6.0
 
-# Reference to the player's collision
+# Reference to the player's collision and interactables
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var ceiling_check: RayCast3D = $CeilingCheck
+@onready var interaction_ray: RayCast3D = $Head/Camera3D/InteractionRay
 
 # Check for whether there's room to stand up
 var is_crouching: bool = false
@@ -48,6 +49,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		# Stop the player looking too far up or down.
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		
+	# Press E to interact with objects
+	if event.is_action_pressed("interact") and not event.is_echo():
+		interact()
 
 
 # Runs every physics frame to handle movement.
@@ -125,3 +130,17 @@ func handle_crouch(delta: float) -> void:
 		target_eye_height,
 		crouch_transition_speed * delta
 	)
+	
+# If dialogue is open, advance it - Otherwise interact with an object
+func interact() -> void:
+	var dialogue_ui = get_tree().current_scene.get_node_or_null("DialogueUI")
+
+	if dialogue_ui != null and dialogue_ui.dialogue_open:
+		dialogue_ui.next_dialogue()
+		return
+
+	if interaction_ray.is_colliding():
+		var object = interaction_ray.get_collider()
+
+		if object.has_method("interact"):
+			object.interact()

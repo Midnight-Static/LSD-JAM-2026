@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b8u4xng1pxiro"]
+
+[ext_resource type="Script" uid="uid://biainkldgnay2" path="res://scenes/dialogue_ui.gd" id="1_dwk8m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2venv"]
+font_size = 25
+
+[node name="DialogueUI" type="CanvasLayer" unique_id=518759866]
+script = ExtResource("1_dwk8m")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=219736824]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = -148.0
+offset_right = -202.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=867509697]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer" unique_id=1150136228]
+layout_mode = 2
+text = "If you read this, you are gay.
+... 
+.....
+That's weird, nothing changed."
+label_settings = SubResource("LabelSettings_2venv")
+horizontal_alignment = 1

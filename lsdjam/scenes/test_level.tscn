@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://13djynn0bse4"]
 
 [ext_resource type="PackedScene" uid="uid://bq5lc6hm3jt8e" path="res://scenes/player/player.tscn" id="1_2venv"]
+[ext_resource type="Script" uid="uid://3cg3lqak2y3s" path="res://scenes/test_level.gd" id="1_tmr53"]
 [ext_resource type="Script" uid="uid://bh3vqd0s8t1et" path="res://scenes/dialogue_button.gd" id="2_j6w7d"]
-[ext_resource type="Script" uid="uid://biainkldgnay2" path="res://scenes/dialogue_ui.gd" id="2_paw1w"]
 [ext_resource type="Script" uid="uid://clb3xrtfowbhi" path="res://scenes/dream_button.gd" id="3_x4b8f"]
+[ext_resource type="PackedScene" uid="uid://b8u4xng1pxiro" path="res://scenes/dialogue_ui.tscn" id="4_x4b8f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rm7dq"]
 size = Vector3(30, 1, 30)
@@ -65,10 +66,8 @@ size = Vector3(3, 0.5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fma6k"]
 size = Vector3(3, 0.5, 5)
 
-[sub_resource type="LabelSettings" id="LabelSettings_2venv"]
-font_size = 25
-
 [node name="TestLevel" type="Node3D" unique_id=2125713836]
+script = ExtResource("1_tmr53")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1948294640]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -138,29 +137,4 @@ mesh = SubResource("BoxMesh_d1cij")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TunnelRoof" unique_id=1621035465]
 shape = SubResource("BoxShape3D_fma6k")
 
-[node name="DialogueUI" type="CanvasLayer" parent="." unique_id=1217447081]
-script = ExtResource("2_paw1w")
-
-[node name="PanelContainer" type="PanelContainer" parent="DialogueUI" unique_id=800381826]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 250.0
-offset_top = -148.0
-offset_right = -202.0
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="DialogueUI/PanelContainer" unique_id=367756990]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DialogueUI/PanelContainer/MarginContainer" unique_id=1679661386]
-layout_mode = 2
-text = "If you read this, you are gay.
-... 
-.....
-That's weird, nothing changed."
-label_settings = SubResource("LabelSettings_2venv")
-horizontal_alignment = 1
+[node name="DialogueUI" parent="." unique_id=518759866 instance=ExtResource("4_x4b8f")]

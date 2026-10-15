@@ -22,6 +22,7 @@ extends CharacterBody3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var ceiling_check: RayCast3D = $CeilingCheck
 @onready var interaction_ray: RayCast3D = $Head/Camera3D/InteractionRay
+@onready var interaction_prompt: Label = $InteractionUI/InteractionPrompt
 
 # Check for whether there's room to stand up
 var is_crouching: bool = false
@@ -33,7 +34,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 # Runs once when the player enters the scene.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	interaction_prompt.hide()
 
 # Handles mouse movement and releasing the cursor.
 func _unhandled_input(event: InputEvent) -> void:
@@ -91,6 +92,9 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction.x * current_speed
 	velocity.z = direction.z * current_speed
 
+	# Check whether the player is looking at something interactable
+	update_interaction_prompt()
+	
 	# Move the player and handle collisions.
 	move_and_slide()
 
@@ -144,3 +148,20 @@ func interact() -> void:
 
 		if object.has_method("interact"):
 			object.interact()
+
+# Show prompt when looking at something interactable
+func update_interaction_prompt() -> void:
+	interaction_prompt.hide()
+
+	# Hide the prompt while reading dialogue
+	var dialogue_ui = get_tree().current_scene.get_node_or_null("DialogueUI")
+
+	if dialogue_ui != null and dialogue_ui.dialogue_open:
+		return
+
+	# Check whether the object we're looking at can be interacted with
+	if interaction_ray.is_colliding():
+		var object = interaction_ray.get_collider()
+
+		if object.has_method("interact"):
+			interaction_prompt.show()
